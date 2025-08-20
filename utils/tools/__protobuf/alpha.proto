@@ -1,0 +1,23 @@
+syntax = "proto3";
+package alpha_encode;
+
+service AlphaStandardGRPCFunction {
+  rpc rpcAlphaStandardGRPCFunction (request) returns (response) {}
+}
+
+message request {
+    string function = 1;
+    string action = 2;
+    string query = 3;
+}
+message response {
+    string response = 1;
+}
+
+
+// python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. alpha.proto
+
+// client(Django)에서는 alpha_pb2_grpc가 alph_pb2를 호출하지 못하는 문제가 발생하기에
+// 아래와 같이 절대 경로로 변경
+//import alpha_pb2 as alpha__pb2를 아래와 같이 변경
+//import apps.alpha_ml_model._protobuf.alpha_pb2 as alpha__pb2
